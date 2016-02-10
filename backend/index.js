@@ -9,12 +9,14 @@ var client = new Twitter({
 });
 
 exports.handler = function(event, context) {
-  var params = {status: 'hello from Lambda!'};
-  client.post('statuses/update', params, function(error, result, response){
-    if (!error) {
-      context.succeed(result);
-    } else {
-      context.fail(error);
-    }
-  });
+  console.log('Received event:', JSON.stringify(event, null, 2));
+  if(!event.status) {
+    context.fail(new Error('Can not get status ' + status + '"'));
+  } else {
+    var params = {status: event.status};
+    client.post('statuses/update', params, function(error, result, response){
+      if (error) context.fail(error);
+      else context.succeed(result);
+    });
+  }
 }

@@ -6,14 +6,13 @@ const PATH = '';
 const X_API_KEY = '';
 
 // S3の設定
-const BUCKET = '';
-const KEY = '';
-const TEXT_DELIMITER = '';
+const BUCKET = 'jaws2016lambda';
+const KEY = 'tweetList.txt';
+const TEXT_DELIMITER = '\r\n';
 
 var aws = require('aws-sdk');
 var s3 = new aws.S3({ apiVersion: '2006-03-01' });
 var https = require('https');
-
 
 // デリミタで指定された文字で文字列を分割し、ランダムの値を返却
 function getRandomMessage(data, delimiter) {
@@ -25,13 +24,19 @@ function getRandomMessage(data, delimiter) {
 // messageで指定された文字列をAPI Gateway経由でツイートする
 function tweet(message, cb) {
     
+    var body = JSON.stringify({
+       status: "tweet from Lambda"
+    })
+    
     var options = {
         host: HOST,
         port: 443,
         path: PATH,
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'x-api-key': X_API_KEY
+            'x-api-key': X_API_KEY,
+            "Content-Type": "application/json",
+            "Content-Length": Buffer.byteLength(body)
         }
     };
     
@@ -46,18 +51,24 @@ function tweet(message, cb) {
         });
         
         res.on('end', function() {
-           ret = JSON.parse(body);
-           console.log(ret);
-           cb(null);
+            
+            if(res.statusCode !== 200) {
+                cb(new Error('Error. status code =  ' + res.statusCode 
+                  + '. Error message = ' + JSON.parse(body).errorMessage));
+            } else {
+              console.log(body);
+              cb(null);  
+            }
         });
         
     });
+    req.write(body);
+    req.end();
     
     req.on('error', function(err) {
         cb(err);
     });
     
-    req.end();
 }
 
 // メイン
