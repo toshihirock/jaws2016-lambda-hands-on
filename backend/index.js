@@ -8,11 +8,13 @@ var client = new Twitter({
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 });
 
-var params = {status: 'hello from Node'};
-client.post('statuses/update', params, function(error, result, response){
-  if (!error) {
-    console.log(result);
-  } else {
-    console.log(error);
-  }
-});
+exports.handler = function(event, context) {
+  var params = {status: 'hello from Lambda!'};
+  client.post('statuses/update', params, function(error, result, response){
+    if (!error) {
+      context.succeed(result);
+    } else {
+      context.fail(error);
+    }
+  });
+}
