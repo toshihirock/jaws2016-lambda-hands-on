@@ -13,6 +13,7 @@
 + AWS アカウントは作成済み
 + AWS CLIは使わない（AWSマネージメントコンソール）
 + Lambdaのコードを書くのもマネージメントコンソールで行う
++ Node.js自体の細かい説明は省略
 
 # ハンズオン概要
 
@@ -33,3 +34,8 @@
 + Lambda Functionの作成（最初はS3連携せず）
 + Lambda Functionの更新(S3と連携)
 + Lambdaでのスケジュール実行との組み合わせ（オプション）
+
+# ソースコード
+
++ index.js->参加者が作成するコードのサンプル
++ backend/index.js->予め講師側で作成するAPI Gateway経由で実行するLambda Function
