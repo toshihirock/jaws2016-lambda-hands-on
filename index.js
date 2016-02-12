@@ -25,7 +25,7 @@ function getRandomMessage(data, delimiter) {
 function tweet(message, cb) {
     
     var body = JSON.stringify({
-       status: "tweet from Lambda"
+       status: message
     })
     
     var options = {
@@ -51,7 +51,6 @@ function tweet(message, cb) {
         });
         
         res.on('end', function() {
-            
             if(res.statusCode !== 200) {
                 cb(new Error('Error. status code =  ' + res.statusCode 
                   + '. Error message = ' + JSON.parse(body).errorMessage));
@@ -60,15 +59,14 @@ function tweet(message, cb) {
               cb(null);  
             }
         });
-        
     });
+
     req.write(body);
     req.end();
     
     req.on('error', function(err) {
         cb(err);
     });
-    
 }
 
 // メイン
