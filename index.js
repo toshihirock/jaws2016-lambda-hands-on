@@ -44,7 +44,7 @@ function tweet(message, cb) {
         console.log("response code = " + res.statusCode)
         
         var body = '';
-        res.setEncoding('utf8');
+        res.setEncoding('utf-8');
         
         res.on('data', function(chunk) {
            body += chunk; 
