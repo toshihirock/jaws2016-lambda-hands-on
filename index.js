@@ -1,8 +1,8 @@
 console.log('Loading function');
 
 // API Gatewayの設定
-const HOST = '';
-const PATH = '';
+const HOST = 'wjz7li7gmj.execute-api.ap-northeast-1.amazonaws.com';
+const PATH = '/prod/statuses/update';
 const X_API_KEY = '';
 
 // S3の設定
