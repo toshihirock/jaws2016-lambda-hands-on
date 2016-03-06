@@ -1,5 +1,7 @@
 // dirver
-var event = {};
+var event = {
+  status: "test"
+};
 var context = {
   invokeid: 'invokeid',
   succeed: function(result) {
