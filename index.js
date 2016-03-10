@@ -17,7 +17,7 @@ var https = require('https');
 // デリミタで指定された文字で文字列を分割し、ランダムの値を返却
 function getRandomMessage(data, delimiter) {
     var lines = data.split(delimiter);
-    var message = lines[Math.floor(Math.random() * lines.length)];
+    var message = lines[Math.floor(Math.random() * (lines.length -1))];
     return message;
 }
 
