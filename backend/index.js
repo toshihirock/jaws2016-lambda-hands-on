@@ -1,7 +1,7 @@
 require('dotenv').load();
 var Twitter = require('twitter');
 
-const HASH_TAG = '#jawsdays'
+const HASH_TAG = '#jawsdays #jd2016_workshop'
 
 var client = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
