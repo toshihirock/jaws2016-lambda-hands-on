@@ -28,3 +28,7 @@
 
 + index.js->参加者が作成するコードのサンプル
 + backend/index.js->予め講師側で作成するAPI Gateway経由で実行するLambda Function
+
+# hoge
+
++ q6XwE9pZUD2FOcpfIQYPJ2dgdiv1XcRG9cIClQjV
